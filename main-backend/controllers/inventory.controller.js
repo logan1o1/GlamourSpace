@@ -8,3 +8,12 @@ export const uploadModels = async (req, resp, next) => {
         next(error)
     }
 }
+
+export const getModels = async (req, resp, next) => {
+    try {
+        const models = await Furniture.find()
+        resp.status(200).json(models);
+    } catch (error) {
+        next(error)
+    }
+}

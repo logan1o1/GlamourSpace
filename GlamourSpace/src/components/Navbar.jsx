@@ -46,11 +46,6 @@ export default function Navbar() {
               About
             </li>
           </Link>
-          <Link to="/docs">
-            <li className="hidden sm:inline hover:underline text-slate-800">
-              Get Started
-            </li>
-          </Link>
           <Link to="/feedbacks">
             <li className="hidden sm:inline hover:underline text-slate-800">
               Feedback

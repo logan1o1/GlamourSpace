@@ -11,7 +11,7 @@ export default function Inventory() {
   const [downloadUrl, setDownloadUrl] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(true);
   const [models, setModels] = useState([]);
 
   const handleSubmit = async (e) => {
@@ -72,7 +72,7 @@ export default function Inventory() {
   useEffect(() => {
     const getModels = async () => {
       try {
-        const res = await fetch("/api/store/getModels", {
+        const res = await fetch("/api/inventory/getModels", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

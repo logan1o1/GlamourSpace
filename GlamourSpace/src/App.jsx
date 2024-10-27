@@ -1,10 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Docks from "./pages/Docks";
 import Feedback from "./pages/Feedback";
 import Navbar from "./components/Navbar";
 import Inventory from "./pages/Inventory";
+import Signup from "./pages/Signup";
+import Signin from "./pages/Signin";
 
 
 function App() {
@@ -16,9 +17,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/docs" element={<Docks />} />
         <Route path="/feedback" element={<Feedback />} />
         <Route path="/store" element={<Inventory />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Signin />} />
       </Routes>
       </BrowserRouter>
     </>

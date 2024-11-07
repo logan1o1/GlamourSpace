@@ -16,6 +16,30 @@ export default function Signin() {
   
     const handleSubmit = async (e) => {
       e.preventDefault();
+      try {
+        setLoading(true);
+        const results = await fetch("/api/user/login", {
+          method: "POST",
+          body: JSON.stringify(formData),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await results.json();
+        if (data.success == false) {
+          setLoading(false);
+          setError(data.message);
+          return;
+        }
+        localStorage.setItem("auth_user", data.username);
+        
+        setLoading(false);
+        setError(null);
+        navigate("/feedbacks");
+      } catch (error) {
+        setLoading(false);
+        setError(error.message);
+      }
     };
   
     return (
@@ -46,7 +70,7 @@ export default function Signin() {
         </form>
         <div className="flex gap-2 mt-5">
           <p>Don't have an account?</p>
-          <Link to="/signup">
+          <Link to="/sign-up">
             <span className="text-blue-600">Sign up</span>
           </Link>
         </div>

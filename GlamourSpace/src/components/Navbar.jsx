@@ -7,14 +7,14 @@ export default function Navbar() {
   const [searchTerm, setSearchTerm] = useState("");
   // const navigate = useNavigate()
 
-  const  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
   };
 
   return (
     <header className="bg-slate-300 shadow-md ">
       <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
-        <Link to="/">
+        <Link className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white' to="/">
           <h1 className="font-bold text-sm sm:text-2xl flex flex-wrap">
             <span className="text-slate-600 font-mono">Glamour</span>
             <span className="text-slate-800 font-mono"> Space</span>
@@ -22,7 +22,10 @@ export default function Navbar() {
           </h1>
         </Link>
 
-        <form onSubmit={handleSubmit} className="bg-slate-200 p-2 rounded-xl flex items-center">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-slate-200 p-2 rounded-xl flex items-center"
+        >
           <input
             type="text"
             placeholder="Search..."
@@ -56,13 +59,14 @@ export default function Navbar() {
               Inventory
             </li>
           </Link>
-          {/* <Link to="/profile">
-            {currentUser ? (
-              <img className="rounded-full h-8 w-8 object-cover" src={currentUser.profPhoto} alt="profile" />
-            ) : (
-              <li className="hover:underline text-slate-800">Sign in</li>
-            )}
-          </Link> */}
+          <Link to="/sign-in" className="hover:underline text-slate-800">Sign-in</Link>
+          {/* {currentUser ? (
+            <Link
+              className="hover:underline text-slate-800"
+            >Log-out</Link>
+          ) : (
+            <Link to={"/signin"} className="hover:underline text-slate-800">Sign-in</Link>
+          )} */}
         </ul>
       </div>
     </header>

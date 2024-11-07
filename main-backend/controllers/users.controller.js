@@ -42,12 +42,12 @@ export const logout = async (req, resp, next) => {
     }
 }
 
-export const deleteAcc = async (req, resp, next) => {
-    if (req.user.id !== req.params.id) next(handleError(401, "you can only delete your own account"));
-  try {
-    await User.findByIdAndDelete(req.params.id);
-    resp.status(200).clearCookie("access_token").json("User has been deleted...");
-  } catch (error) {
-    next(error);
-  }
-}
+// export const deleteAcc = async (req, resp, next) => {
+//     if (req.user.id !== req.params.id) next(handleError(401, "you can only delete your own account"));
+//   try {
+//     await User.findByIdAndDelete(req.params.id);
+//     resp.status(200).clearCookie("access_token").json("User has been deleted...");
+//   } catch (error) {
+//     next(error);
+//   }
+// }

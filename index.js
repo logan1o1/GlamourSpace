@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import inventoryRouter from "./main-backend/routes/inventory.route.js";
 import cors from "cors";
 import userRouter from "./main-backend/routes/users.route.js";
+import feedbackRouter from "./main-backend/routes/feedback.route.js";
 
 
 dotenv.config();
@@ -22,6 +23,7 @@ app.use(cors(corsOptions))
 
 app.use("/api/inventory", inventoryRouter);
 app.use("/api/user", userRouter)
+app.use("/api/feedback", feedbackRouter)
 
 app.listen(PORT, () => {
     connectToDb()

@@ -1,4 +1,3 @@
-import { type } from "express/lib/response";
 import mongoose from "mongoose";
 
 const feedbackModel = mongoose.Schema({
@@ -18,12 +17,15 @@ const feedbackModel = mongoose.Schema({
     },
     upvote:{
         type: Number,
+        default: 0
     },
     downvote:{
-        type: Number
+        type: Number,
+        default: 0
     },
     reply:{
-        type: Array
+        type: Array,
+        default: []
     }
 })
 

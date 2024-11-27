@@ -3,8 +3,9 @@ import { FaSearch } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
+import { TfiMenu } from "react-icons/tfi";
 
-export default function Navbar() {
+export default function Navbar({ toggleSidebar }) {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const { authUser, logout } = useAuthContext();
@@ -18,14 +19,19 @@ export default function Navbar() {
     try {
       await fetch("/api/user/logout");
       logout();
-      setCurrentUser(null);
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <header className="bg-slate-300 shadow-md ">
+    <header className=" bg-slate-300 shadow-md z-50">
+      <button
+        className="fixed pl-1 pt-5 w-5 h-5 inline-block rounded-full "
+        onClick={toggleSidebar}
+      >
+        <TfiMenu size={24} />
+      </button>
       <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
         <Link
           className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white"

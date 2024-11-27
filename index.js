@@ -27,7 +27,7 @@ app.use("/api/feedback", feedbackRouter)
 
 app.listen(PORT, () => {
     connectToDb()
-    console.log("app running on:",PORT);
+    console.log("app running on:", PORT);
 });
 
 app.use((err, req, resp, next) => {

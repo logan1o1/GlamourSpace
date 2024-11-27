@@ -33,8 +33,8 @@ export default function Signin() {
         setError(data.message);
         return;
       }
-
-      login(data);
+      
+      login(JSON.stringify(data));
       setLoading(false);
       setError(null);
       navigate("/feedbacks");

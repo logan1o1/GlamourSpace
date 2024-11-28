@@ -1,4 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+// import Installation from '../Docs/Installation'
+// import Overview from '../Docs/Overview'
+// import Usage from '../Docs/Usage'
+// import SupportedDevices from '../Docs/SupportedDevices'
+// import FAQs from '../Docs/FaQs'
+// import Features from '../Docs/Features'
 
 export default function Home() {
   return (
@@ -26,31 +33,33 @@ export default function Home() {
       {/* Buttons */}
       <div className="flex flex-col md:flex-row gap-4">
         {/* Download Button */}
-        <a
-          href="#download"
+        <Link
+          to="#download"
           className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition"
         >
           Download 
-        </a>
+        </Link>
         {/* Documentation Button */}
-        <a
-          href="#documentation"
+        <Link
+          to="/overview"
           className="bg-gray-800 text-white px-6 py-3 rounded-lg shadow-md hover:bg-gray-900 transition"
         >
           Get Started
-        </a>
-        <a
-          href="#feedback"
+        </Link>
+        <Link
+          to="/feedbacks"
           className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition"
         >
           Give us a feedback
-        </a>
+        </Link>
       </div>
 
-      {/* Footer */}
-      <footer className="mt-12 text-center text-gray-600 text-sm">
-        © 2024 GlamourSpaceAR. All rights reserved.
-      </footer>
+      {/* <Overview/>
+      <Installation/>
+      <Usage/>
+      <Features/>
+      <SupportedDevices/>
+      <FAQs/> */}
     </div>
   )
 }

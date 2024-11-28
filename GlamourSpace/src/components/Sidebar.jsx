@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { TfiMenu } from "react-icons/tfi";
+import { Link } from "react-router-dom";
+
 
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
@@ -7,11 +9,11 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
   const menuItems = [
     { id: "overview", label: "Overview" },
-    { id: "installation", label: "Installation" },
-    { id: "usage", label: "Usage" },
     { id: "features", label: "Features" },
-    { id: "supported-devices", label: "Supported Devices" },
-    { id: "faq", label: "FAQs" },
+    { id: "instalation", label: "Installation" },
+    { id: "usages", label: "Usage" },
+    { id: "supportedDevices", label: "Supported Devices" },
+    { id: "faqs", label: "FAQs" },
     { id: "contact-support", label: "Contact Support" },
   ];
 
@@ -44,7 +46,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             }`}
             onClick={() => setActiveItem(item.id)}
           >
-            {item.label}
+            <Link to={item.id}>{item.label}</Link>
           </li>
         ))}
       </ul>

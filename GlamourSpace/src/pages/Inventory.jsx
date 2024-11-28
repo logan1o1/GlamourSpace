@@ -33,10 +33,14 @@ export default function Inventory() {
       setLoading(false);
       const data = await res.json();
       if (data.success == false) setError(data.message);
+      setFilename("");
+      setDownloadUrl("");
+      setFile([]);
     } catch (error) {
       setError(error.message);
     }
   };
+  
 
   const uplodeZip = () => {
     if (!file) return;
@@ -121,16 +125,13 @@ export default function Inventory() {
               {/* File Input */}
               <div>
                 <label
-                  htmlFor="file"
                   className="block text-gray-700 font-medium mb-2"
                 >
                   File (.zip):
                 </label>
                 <input
-                  id="file"
                   type="file"
-                  accept=".zip"
-                  onChange={(event) => setFile(event.target.files[0])}
+                  onChange={(event) => setFile(event.target.files)}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
@@ -152,6 +153,7 @@ export default function Inventory() {
                     className="w-2/3 h-4 rounded-lg border border-gray-300"
                   />
                 )}
+                <span>{Math.floor(uploadProgress)}%</span>
               </div>
 
               {/* Submit Button */}

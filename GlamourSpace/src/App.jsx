@@ -9,6 +9,13 @@ import Signin from "./pages/Signin";
 import AddReview from "./components/AddReview";
 import Sidebar from "./components/Sidebar";
 import { useState } from "react";
+import Installation from "./Docs/Installation";
+import Overview from "./Docs/Overview";
+import Usage from "./Docs/Usage";
+import Features from "./Docs/Features";
+import SupportedDevices from "./Docs/SupportedDevices";
+import FAQs from "./Docs/FaQs";
+import Footer from "./components/Footer";
 
 
 function App() {
@@ -32,7 +39,14 @@ function App() {
         <Route path="/add-review" element={<AddReview />} />
         <Route path="/sign-up" element={<Signup />} />
         <Route path="/sign-in" element={<Signin />} />
+        <Route path="/instalation" element={<Installation />} />
+        <Route path="/overview" element={<Overview />} />
+        <Route path="/usages" element={<Usage />} />
+        <Route path="/features" element={<Features />} />
+        <Route path="/supportedDevices" element={<SupportedDevices />} />
+        <Route path="/faqs" element={<FAQs />} />
       </Routes>
+      <Footer/>
       </BrowserRouter>
     </>
   )

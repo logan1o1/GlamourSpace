@@ -1,32 +1,31 @@
 import mongoose from "mongoose";
 
 const feedbackModel = mongoose.Schema({
-    username:{
+    username: {
         type: String,
         required: true,
     },
-    feedback:{
+    feedback: {
         type: String,
     },
-    rating:{
+    rating: {
         type: Number,
         min: 1,
         max: 5,
         required: true
     },
-    upvote:{
+    likes: {
         type: Number,
         default: 0
     },
-    downvote:{
-        type: Number,
-        default: 0
-    },
-    reply:{
-        type: Array,
-        default: []
-    }
-})
+    comments: [
+        {
+            content: { type: String },
+            user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+            createdAt: { type: Date, default: Date.now },
+        },
+    ],
+}, { timestamps: true })
 
 const Feedback = mongoose.model("feedback", feedbackModel);
 export default Feedback;

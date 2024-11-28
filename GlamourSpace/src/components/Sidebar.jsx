@@ -17,13 +17,13 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
   return (
     <div
-      className={`fixed top-0 left-0 h-full w-64 bg-slate-300 transform ${
+      className={`fixed top-0 left-0 h-full w-50 bg-slate-300 transform ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       } transition-transform duration-300 z-40`}
     >
       {/* Sidebar Header */}
-      <div className="p-4 font-bold text-lg border-b border-gray-700 flex justify-between items-center">
-        <span>Getting Started</span>
+      <div className="p-4 font-bold text-lg flex justify-between items-center">
+        <span>Get Started</span>
         <button
           className=" focus:outline-none"
           onClick={toggleSidebar}

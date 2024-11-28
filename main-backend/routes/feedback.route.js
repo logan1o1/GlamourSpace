@@ -5,5 +5,7 @@ const feedbackRouter = express.Router()
 
 feedbackRouter.post("/giveFeedback", giveFeedback)
 feedbackRouter.get("/getFeddbacks", getFeddbacks)
+// feedbackRouter.post("/:id/comment", createComment);
+// feedbackRouter.post("/:id/like", likePost);
 
 export default feedbackRouter;

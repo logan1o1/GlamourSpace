@@ -97,14 +97,13 @@ export default function Inventory() {
 
   return (
     <div >
-      {user.isAdmin ? (
+      {user ? user.isAdmin ? (
         <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 flex items-center justify-center px-4 py-10">
           <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-lg">
             <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
               Upload .zip File
             </h2>
             <form action="form" onSubmit={handleSubmit} className="space-y-4">
-              {/* File Name Input */}
               <div>
                 <label
                   htmlFor="filename"
@@ -122,7 +121,6 @@ export default function Inventory() {
                 />
               </div>
 
-              {/* File Input */}
               <div>
                 <label
                   className="block text-gray-700 font-medium mb-2"
@@ -136,7 +134,6 @@ export default function Inventory() {
                 />
               </div>
 
-              {/* Upload Button */}
               <div className="flex justify-between items-center">
                 <button
                   type="button"
@@ -156,7 +153,6 @@ export default function Inventory() {
                 <span>{Math.floor(uploadProgress)}%</span>
               </div>
 
-              {/* Submit Button */}
               <button
                 type="submit"
                 className="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg shadow-md transition-colors"
@@ -169,11 +165,9 @@ export default function Inventory() {
       ) : (
         <div className="min-h-screen bg-blue-50 flex justify-center">
         <div className="max-w-6xl w-full py-12 px-4">
-          {/* Heading */}
           <h1 className="text-2xl font-bold text-gray-800 text-center mb-8">
             Available Models
           </h1>
-          {/* Cards Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
             {models.length > 0 ? (
               models.map((model) => (
@@ -202,7 +196,7 @@ export default function Inventory() {
           </div>
         </div>
       </div>
-      )}
+      ) : <h2 className="text-2xl text-gray-800 text-center mb-8">Please Signin to view this page</h2>}
     </div>
   );
 }

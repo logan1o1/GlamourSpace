@@ -5,7 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "start": "node index.js",
+    "build": "npm install && npm install --prefix GlamourSpace && npm run build --prefix GlamourSpace"
   },
   "author": "",
   "license": "ISC",

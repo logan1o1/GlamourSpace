@@ -11,13 +11,13 @@ import path from 'path';
 const __dirname = path.resolve()
 
 dotenv.config();
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || 6000
 
 const app = exp();
 app.use(exp.json());
 
 const corsOptions = {
-    origin: ["http://localhost:5173"],
+    origin: ["https://*", "http://*"],
     methods: ["GET", "POST", "PUT", "DELETE"],
 }
 app.use(cors(corsOptions))

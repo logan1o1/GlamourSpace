@@ -9,12 +9,12 @@ import Signin from "./pages/Signin";
 import AddReview from "./components/AddReview";
 import Sidebar from "./components/Sidebar";
 import { useState } from "react";
-import Installation from "./Docs/Installation";
-import Overview from "./Docs/Overview";
-import Usage from "./Docs/Usage";
-import Features from "./Docs/Features";
-import SupportedDevices from "./Docs/SupportedDevices";
-import FAQs from "./Docs/FaQs";
+import Installation from "./docs/Installation";
+import Overview from "./docs/Overview";
+import Usage from "./docs/Usage";
+import Features from "./docs/Features";
+import SupportedDevices from "./docs/SupportedDevices";
+import FAQs from "./docs/FAQs";
 import Footer from "./components/Footer";
 
 

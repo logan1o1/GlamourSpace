@@ -21,7 +21,6 @@ import Footer from "./components/Footer";
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  // Function to toggle the sidebar state
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };

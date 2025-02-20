@@ -17,3 +17,5 @@ export const getModels = async (req, resp, next) => {
         next(error)
     }
 }
+
+export const reqModel = async (req, resp, next) => {}

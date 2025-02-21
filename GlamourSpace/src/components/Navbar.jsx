@@ -81,6 +81,11 @@ export default function Navbar({ toggleSidebar }) {
               Inventory
             </li>
           </Link>
+          <Link to="/requested-models">
+            <li className="hidden sm:inline hover:underline text-slate-800">
+              Requsted Models
+            </li>
+          </Link>
         </ul>
         <select
           onChange={(event) => {

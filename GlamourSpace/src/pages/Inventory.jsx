@@ -13,7 +13,34 @@ export default function Inventory() {
   const [error, setError] = useState("");
   const [models, setModels] = useState([]);
   const { authUser } = useAuthContext();
+  const [username, setUsername] = useState("");
+  const [modelName, setModelName] = useState("");
   const user = JSON.parse(authUser);
+
+  const reqModel = async (e) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      const response = await fetch("/api/inventory/reqModel", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: username,
+          model: modelName,
+        }),
+      })
+      setLoading(false);
+      const data = await res.json();
+      if (data.success == false) setError(data.message);
+      setUsername("")
+      setModelName("")
+    } catch (error) {
+      setLoading(false)
+      setError(error.message);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,10 +64,10 @@ export default function Inventory() {
       setDownloadUrl("");
       setFile([]);
     } catch (error) {
+      setLoading(false)
       setError(error.message);
     }
   };
-  
 
   const uplodeZip = () => {
     if (!file) return;
@@ -96,107 +123,156 @@ export default function Inventory() {
   }, []);
 
   return (
-    <div >
-      {user ? user.isAdmin ? (
-        <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 flex items-center justify-center px-4 py-10">
-          <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-lg">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
-              Upload .zip File
-            </h2>
-            <form action="form" onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label
-                  htmlFor="filename"
-                  className="block text-gray-700 font-medium mb-2"
-                >
-                  File Name:
-                </label>
-                <input
-                  id="filename"
-                  type="text"
-                  placeholder="Enter file name"
-                  value={filename}
-                  onChange={(event) => setFilename(event.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-                />
-              </div>
+    <div>
+      {user ? (
+        user.isAdmin ? (
+          <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 flex items-center justify-center px-4 py-10">
+            <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-lg">
+              <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
+                Upload .zip File
+              </h2>
+              <form action="form" onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <label
+                    htmlFor="filename"
+                    className="block text-gray-700 font-medium mb-2"
+                  >
+                    File Name:
+                  </label>
+                  <input
+                    id="filename"
+                    type="text"
+                    placeholder="Enter file name"
+                    value={filename}
+                    onChange={(event) => setFilename(event.target.value)}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
 
-              <div>
-                <label
-                  className="block text-gray-700 font-medium mb-2"
-                >
-                  File (.zip):
-                </label>
-                <input
-                  type="file"
-                  onChange={(event) => setFile(event.target.files)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-                />
-              </div>
+                <div>
+                  <label className="block text-gray-700 font-medium mb-2">
+                    File (.zip):
+                  </label>
+                  <input
+                    type="file"
+                    onChange={(event) => setFile(event.target.files)}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
 
-              <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center">
+                  <button
+                    type="button"
+                    onClick={uplodeZip}
+                    className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md transition-colors"
+                  >
+                    Upload File
+                  </button>
+
+                  {uploadProgress > 0 && (
+                    <progress
+                      value={uploadProgress}
+                      max="100"
+                      className="w-2/3 h-4 rounded-lg border border-gray-300"
+                    />
+                  )}
+                  <span>{Math.floor(uploadProgress)}%</span>
+                </div>
+
                 <button
-                  type="button"
-                  onClick={uplodeZip}
+                  type="submit"
+                  className="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg shadow-md transition-colors"
+                >
+                  Submit File
+                </button>
+              </form>
+            </div>
+          </div>
+        ) : (
+          <div className="min-h-screen bg-blue-50 flex justify-center">
+            <div className="max-w-6xl w-full py-12 px-4">
+              <h1 className="text-2xl font-bold text-gray-800 text-center mb-8">
+                Available Models
+              </h1>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
+                {models.length > 0 ? (
+                  models.map((model) => (
+                    <div
+                      key={model.id}
+                      className="bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer w-60"
+                    >
+                      <h3 className="text-lg font-semibold text-gray-800 truncate">
+                        {model.name}
+                      </h3>
+                      <p className="text-sm text-gray-600 mt-2 truncate">
+                        {model.description}
+                      </p>
+                      <Link
+                        to={model.file}
+                        className="block mt-4 bg-blue-500 text-white text-center px-4 py-2 rounded hover:bg-blue-600"
+                        download
+                      >
+                        Download
+                      </Link>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-gray-500">
+                    No models available at the moment.
+                  </p>
+                )}
+              </div>
+              <h1 className="text-2xl font-bold text-gray-800 mb-6 mt-6 text-center">
+                Request a Model
+              </h1>
+              <form className="space-y-4 " action="form">
+                <div>
+                  <label
+                    htmlFor="username"
+                    className="block text-gray-700 font-medium mb-2"
+                  >
+                    Username:
+                  </label>
+                  <input
+                    id="username"
+                    type="text"
+                    placeholder="Enter username"
+                    value={username}
+                    onChange={(event) => setUsername(event.target.value)}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="modelname"
+                    className="block text-gray-700 font-medium mb-2"
+                  >
+                    Model name:
+                  </label>
+                  <input
+                    id="modelname"
+                    type="text"
+                    placeholder="Enter model name"
+                    value={modelName}
+                    onChange={(event) => setModelName(event.target.value)}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+                <button
+                  onClick={reqModel}
                   className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md transition-colors"
                 >
-                  Upload File
+                  Submit Request
                 </button>
-
-                {uploadProgress > 0 && (
-                  <progress
-                    value={uploadProgress}
-                    max="100"
-                    className="w-2/3 h-4 rounded-lg border border-gray-300"
-                  />
-                )}
-                <span>{Math.floor(uploadProgress)}%</span>
-              </div>
-
-              <button
-                type="submit"
-                className="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg shadow-md transition-colors"
-              >
-                Submit File
-              </button>
-            </form>
+              </form>
+            </div>
           </div>
-        </div>
+        )
       ) : (
-        <div className="min-h-screen bg-blue-50 flex justify-center">
-        <div className="max-w-6xl w-full py-12 px-4">
-          <h1 className="text-2xl font-bold text-gray-800 text-center mb-8">
-            Available Models
-          </h1>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
-            {models.length > 0 ? (
-              models.map((model) => (
-                <div
-                  key={model.id}
-                  className="bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer w-60"
-                >
-                  <h3 className="text-lg font-semibold text-gray-800 truncate">
-                    {model.name}
-                  </h3>
-                  <p className="text-sm text-gray-600 mt-2 truncate">
-                    {model.description }
-                  </p>
-                  <Link
-                    to={model.file}
-                    className="block mt-4 bg-blue-500 text-white text-center px-4 py-2 rounded hover:bg-blue-600"
-                    download
-                  >
-                    Download
-                  </Link>
-                </div>
-              ))
-            ) : (
-              <p className="text-gray-500">No models available at the moment.</p>
-            )}
-          </div>
-        </div>
-      </div>
-      ) : <h2 className="text-2xl text-gray-800 text-center mb-8">Please Signin to view this page</h2>}
+        <h2 className="text-2xl text-gray-800 text-center mb-8">
+          Please Signin to view this page
+        </h2>
+      )}
     </div>
   );
 }

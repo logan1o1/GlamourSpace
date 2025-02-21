@@ -6,6 +6,6 @@ const inventoryRouter = express.Router();
 
 inventoryRouter.post("/uploadModels", uploadModels);
 inventoryRouter.get("/getModels", getModels);
-inventoryRouter.post("reqModel", verifyToken, reqModel)
+inventoryRouter.post("/reqModel",  reqModel)
 
 export default inventoryRouter;

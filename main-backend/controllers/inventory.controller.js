@@ -27,3 +27,12 @@ export const reqModel = async (req, resp, next) => {
         next(error)
     }
 }
+
+export const getReqModels = async (req, resp, next) => {
+    try {
+        const reqModels = await Reqmodels.find();
+        resp.status(200).json(reqModels) 
+    } catch (error) {
+        next(error)
+    }
+}

@@ -4,9 +4,12 @@ const reqModel = mongoose.Schema({
     username:{
         type: String,
         required: true,
-        unique: true
     },
     model: {
+        type: String,
+        required: true
+    },
+    description: {
         type: String,
         required: true
     }

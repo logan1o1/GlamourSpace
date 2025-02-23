@@ -6,6 +6,7 @@ import AddReview from "../components/AddReview";
 import { createSvgIcon } from "@mui/material/utils";
 import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useEventContext } from "../context/EventContext";
 
 export default function Feedback() {
   const [error, setError] = useState(false);
@@ -13,34 +14,20 @@ export default function Feedback() {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [feedbackTxt, setFeedbackTxt] = useState("");
+  const [commentText, setCommentText] = useState("");
   const { authUser } = useAuthContext();
   const user = JSON.parse(authUser);
   const navigate = useNavigate();
-  const [likes, setLikes] = useState(0);
   const [feedbacks, setFeedbacks] = useState([]);
   const [clicked, setClicked] = useState(false);
-  const [liked, setLiked] = useState(false); // Tracks if the user liked
-  const [disliked, setDisliked] = useState(false); // Tracks if the user disliked
+  const [openReplyId, setOpenReplyId] = useState(null);
+  const { eventsChanged, triggerEventsChange } = useEventContext();
 
-  const handleUpvote = () => {
-    if (liked) {
-      setLikes(likes - 1); // Remove like if already liked
-      setLiked(false);
+  const handleToggleReply = (id) => {
+    if (openReplyId === id) {
+      setOpenReplyId(null);
     } else {
-      setLikes(likes + 1 + (disliked ? 1 : 0)); // Add like and undo dislike if applicable
-      setLiked(true);
-      setDisliked(false); // Reset dislike state
-    }
-  };
-
-  const handleDownvote = () => {
-    if (disliked) {
-      setLikes(likes + 1); // Remove dislike if already disliked
-      setDisliked(false);
-    } else {
-      setLikes(likes - 1 - (liked ? 1 : 0)); // Add dislike and undo like if applicable
-      setDisliked(true);
-      setLiked(false); // Reset like state
+      setOpenReplyId(id);
     }
   };
 
@@ -60,12 +47,10 @@ export default function Feedback() {
           username: user.username,
           feedback: feedbackTxt,
           rating: value,
-          likes: likes,
         }),
       });
-
       const data = await response.json();
-
+      setLoading(false);
       if (data.success != false) {
         setOpen(false);
         setValue(null);
@@ -73,7 +58,9 @@ export default function Feedback() {
         setLoading(false);
         setError(false);
         navigate("/feedbacks");
+        return;
       }
+      triggerEventsChange();
     } catch (error) {
       setLoading(false);
       setError(error.message);
@@ -101,7 +88,7 @@ export default function Feedback() {
 
   useEffect(() => {
     getFeedbacks();
-  }, []);
+  }, [eventsChanged]);
 
   const PlusIcon = createSvgIcon(
     // credit: plus icon from https://heroicons.com
@@ -120,6 +107,85 @@ export default function Feedback() {
     </svg>,
     "Plus"
   );
+
+  const likeFeedback = async (id) => {
+    const userAlreadyLiked = feedbacks.some((feedback) =>
+      feedback.likes.includes(user._id)
+    );
+    if (userAlreadyLiked) {
+      return;
+    }
+    try {
+      setLoading(true);
+      const response = await fetch("/api/feedback/like", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          feedbackId: id,
+          userId: user._id,
+        }),
+      });
+      const data = await response.json();
+      console.log(data);
+      setLoading(false);
+      if (data.success == false) setError(data.message);
+      triggerEventsChange();
+    } catch (error) {
+      setLoading(false);
+      setError(error.message);
+    }
+  };
+
+  const dislikeFeedback = async (id) => {
+    const userAlreadyLiked = feedbacks.some((feedback) =>
+      feedback.likes.includes(user._id)
+    );
+    if (!userAlreadyLiked) {
+      return;
+    }
+    try {
+      setLoading(true);
+      const response = await fetch("/api/feedback/dislike", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          feedbackId: id,
+          userId: user._id,
+        }),
+      });
+      const data = await response.json();
+      console.log(data);
+      setLoading(false);
+      if (data.success == false) setError(data.message);
+      triggerEventsChange();
+    } catch (error) {
+      setLoading(false);
+      setError(error.message);
+    }
+  };
+
+  const commentFunc = async (id) => {
+    try {
+      setLoading(true);
+      const response = await fetch("/api/feedback/comment", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          feedbackId: id,
+          userName: user.username,
+          content: commentText,
+        }),
+      });
+      const data = await response.json();
+      console.log(data);
+      setLoading(false);
+      if (data.success == false) setError(data.message);
+      triggerEventsChange();
+    } catch (error) {
+      setLoading(false);
+      setError(error.message);
+    }
+  };
 
   return (
     <div className="flex flex-col items-center justify-center h-full">
@@ -162,7 +228,6 @@ export default function Feedback() {
       {feedbacks ? (
         <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 p-5">
           <div className="max-w-4xl mx-auto">
-            {/* Feedback Cards in Column Layout */}
             <div className="flex flex-col gap-4">
               {feedbacks.map((feed, index) => (
                 <div
@@ -176,22 +241,92 @@ export default function Feedback() {
                     </div>
                     <Rating name="read-only" value={feed.rating} readOnly />
                   </div>
+
+                  {/* Feedback text */}
                   <p className="text-gray-600 text-sm">{feed.feedback}</p>
+
                   <div className="flex items-center border-t border-gray-300 pt-3 mt-2">
                     <button
+                      onClick={() => likeFeedback(feed._id)}
                       className="flex items-center text-gray-500 hover:text-blue-500 mr-4"
-                      onClick={() => handleUpvote(feed.id)}
                     >
                       <FaArrowUp />
-                      <span className="ml-2">{feed.likes}</span>
                     </button>
                     <button
+                      onClick={() => dislikeFeedback(feed._id)}
                       className="flex items-center text-gray-500 hover:text-blue-500"
-                      onClick={() => handleDownvote(feed.id)}
                     >
                       <FaArrowDown />
                     </button>
+                    <span className="ml-1">{feed.likes.length} likes</span>
+
+                    <div className="ml-auto flex items-center space-x-2">
+                      <p className="text-sm text-gray-500">
+                        {feed.comments.length}
+                      </p>
+                      <button
+                        onClick={() => handleToggleReply(feed._id)}
+                        className="text-sm text-gray-500 hover:underline"
+                      >
+                        Replies
+                      </button>
+                    </div>
                   </div>
+
+                  {openReplyId === feed._id && (
+                    <>
+                      <div className="mt-2 ml-4">
+                        <textarea
+                          value={commentText}
+                          onChange={(event) =>
+                            setCommentText(event.target.value)
+                          }
+                          className="w-full border border-gray-300 rounded p-2 text-sm"
+                          placeholder="Add a public reply..."
+                        />
+                        <div className="flex space-x-2 mt-2">
+                          <button
+                            onClick={() => setOpenReplyId(null)}
+                            className="text-sm text-gray-500 hover:underline"
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            onClick={() => {
+                              commentFunc(feed._id);
+                              setOpenReplyId(null);
+                              return;
+                            }}
+                            className="text-sm text-blue-500 hover:underline"
+                          >
+                            Reply
+                          </button>
+                        </div>
+                      </div>
+                      {feed.comments && feed.comments.length > 0 && (
+                        <div className="mt-4 ml-4 space-y-2">
+                          {feed.comments.map((comment) => (
+                            <div
+                              key={feed._id}
+                              className="flex items-start space-x-2"
+                            >
+                              <div>
+                                <p className="text-sm font-semibold">
+                                  {comment.userName}
+                                </p>
+                                <p className="text-sm text-gray-700">
+                                  {comment.content}
+                                </p>
+                                <p className="text-xs text-gray-400">
+                                  {comment.createdAt}
+                                </p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </>
+                  )}
                 </div>
               ))}
             </div>

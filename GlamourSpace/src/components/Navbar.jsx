@@ -27,24 +27,20 @@ export default function Navbar() {
 
   return (
     <header className="bg-slate-300 shadow-md z-50 w-full">
-      {/* Main Container */}
       <div className="max-w-6xl mx-auto px-3 py-3 flex justify-between items-center">
-        {/* Logo/Brand */}
         <Link to="/" className="font-bold">
-          {/* Show GSAR on mobile, full name on md+ */}
           <h1 className="block md:hidden text-lg text-slate-800">GSAR</h1>
           <h1 className="hidden md:block text-2xl text-slate-800">
             <span className="text-slate-600 font-mono">Glamour</span>
-            <span className="text-slate-800 font-mono"> Space</span>
-            <span className="text-slate-600 font-mono"> AR</span>
+            <span className="text-slate-800 font-mono">Space</span>
+            <span className="text-slate-600 font-mono">AR</span>
           </h1>
         </Link>
 
         {/* Search Bar */}
         <form
           onSubmit={handleSubmit}
-          className="bg-slate-200 p-2 rounded-xl flex items-center
-                     w-28 sm:w-64 mr-2"
+          className="bg-slate-200 p-2 rounded-xl flex items-center w-28 sm:w-64 mr-2"
         >
           <input
             type="text"
@@ -58,7 +54,6 @@ export default function Navbar() {
           </button>
         </form>
 
-        {/* Desktop Navigation */}
         <ul className="hidden md:flex gap-4 items-center">
           <Link to="/">
             <li className="hover:underline text-slate-800">Home</li>
@@ -85,13 +80,10 @@ export default function Navbar() {
           )}
         </ul>
 
-        {/* Mobile Dropdown (3-lines icon) */}
         <div className="md:hidden relative group">
           <TfiMenu size={24} className="cursor-pointer" />
-          {/* Dropdown Menu (appears on hover/tap) */}
           <ul
-            className="absolute right-0 mt-2 w-40 bg-white shadow-md rounded-md p-2 
-                       hidden group-hover:block"
+            className="absolute right-0 mt-2 w-40 bg-white shadow-md rounded-md p-2 hidden group-hover:block"
           >
             <Link to="/">
               <li className="hover:underline text-slate-800 py-1">Home</li>
@@ -121,7 +113,6 @@ export default function Navbar() {
           </ul>
         </div>
 
-        {/* Auth: Sign Out or Sign In */}
         {authUser ? (
           <BiLogOut
             onClick={signoutHandler}

@@ -2,6 +2,7 @@ import bcryptjs from "bcryptjs";
 import User from "../schema/user.model.js"
 import { handleError } from "../middlewares/error.js";
 import jwt from "jsonwebtoken";
+import generateAndSetTokens from "../middlewares/GenerateAndSetCookies.js";
 
 export const signup = async (req, resp, next) => {
     const { username, email, password } = req.body;
@@ -25,9 +26,8 @@ export const login = async (req, resp, next) => {
         if (!validUser) return next(handleError(404, "User not found"));
         const isValidPassword = bcryptjs.compareSync(password, validUser.password);
         if (!isValidPassword) return next(handleError(401, "Wrong password"));
-        const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
-        // const { password: pass, ...rest } = validUser._doc;
-        resp.cookie("access_token", token, { httponly: true }).status(200).json(validUser)
+        generateAndSetTokens(validUser._id, resp);
+        resp.status(200).json(validUser);
     } catch (error) {
         next(error)
     }

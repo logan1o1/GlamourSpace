@@ -3,6 +3,7 @@ import { storage } from "../FirebaseConfig";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
+import { useEventContext } from "../context/EventContext";
 
 export default function Inventory() {
   const [filename, setFilename] = useState("");
@@ -13,9 +14,16 @@ export default function Inventory() {
   const [error, setError] = useState("");
   const [models, setModels] = useState([]);
   const { authUser } = useAuthContext();
-  const [username, setUsername] = useState("");
-  const [modelName, setModelName] = useState("");
+  const [reqBody, setReqBody] = useState({});
   const user = JSON.parse(authUser);
+  const { eventsChanged, triggerEventsChange } = useEventContext();
+
+  const handleChange = (e) => {
+    setReqBody({
+      ...reqBody,
+      [e.target.id]: e.target.value,
+    });
+  };
 
   const reqModel = async (e) => {
     e.preventDefault();
@@ -27,17 +35,20 @@ export default function Inventory() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: username,
-          model: modelName,
+          ...reqBody,
+          username: reqBody.username,
+          model: reqBody.model,
+          description: reqBody.description,
         }),
-      })
+      });
+      const data = await response.json();
+      console.log(data);
       setLoading(false);
-      const data = await res.json();
       if (data.success == false) setError(data.message);
-      setUsername("")
-      setModelName("")
+      setReqBody({});
+      triggerEventsChange()
     } catch (error) {
-      setLoading(false)
+      setLoading(false);
       setError(error.message);
     }
   };
@@ -57,14 +68,14 @@ export default function Inventory() {
           file: downloadUrl,
         }),
       });
-      setLoading(false);
       const data = await res.json();
+      setLoading(false);
       if (data.success == false) setError(data.message);
       setFilename("");
       setDownloadUrl("");
       setFile([]);
     } catch (error) {
-      setLoading(false)
+      setLoading(false);
       setError(error.message);
     }
   };
@@ -120,7 +131,7 @@ export default function Inventory() {
     };
 
     getModels();
-  }, []);
+  }, [eventsChanged]);
 
   return (
     <div>
@@ -198,7 +209,7 @@ export default function Inventory() {
                 {models.length > 0 ? (
                   models.map((model) => (
                     <div
-                      key={model.id}
+                      key={model._id}
                       className="bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer w-60"
                     >
                       <h3 className="text-lg font-semibold text-gray-800 truncate">
@@ -225,7 +236,7 @@ export default function Inventory() {
               <h1 className="text-2xl font-bold text-gray-800 mb-6 mt-6 text-center">
                 Request a Model
               </h1>
-              <form className="space-y-4 " action="form">
+              <form onSubmit={reqModel} className="space-y-4 " action="form">
                 <div>
                   <label
                     htmlFor="username"
@@ -237,29 +248,42 @@ export default function Inventory() {
                     id="username"
                     type="text"
                     placeholder="Enter username"
-                    value={username}
-                    onChange={(event) => setUsername(event.target.value)}
+                    onChange={handleChange}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                   />
                 </div>
                 <div>
                   <label
-                    htmlFor="modelname"
+                    htmlFor="model"
                     className="block text-gray-700 font-medium mb-2"
                   >
                     Model name:
                   </label>
                   <input
-                    id="modelname"
+                    id="model"
                     type="text"
                     placeholder="Enter model name"
-                    value={modelName}
-                    onChange={(event) => setModelName(event.target.value)}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="description"
+                    className="block text-gray-700 font-medium mb-2"
+                  >
+                    Model description:
+                  </label>
+                  <input
+                    id="description"
+                    type="text"
+                    placeholder="Enter Description"
+                    onChange={handleChange}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                   />
                 </div>
                 <button
-                  onClick={reqModel}
+                  type="submit"
                   className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md transition-colors"
                 >
                   Submit Request

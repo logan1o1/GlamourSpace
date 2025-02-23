@@ -2,8 +2,8 @@ import Feedback from "../schema/feedback.model.js";
 
 
 export const giveFeedback = async (req, resp, next) => {
-    const { username, feedback, rating, likes } = req.body;
-    const newFeedback = new Feedback({ username, feedback, rating, likes });
+    const { username, feedback, rating } = req.body;
+    const newFeedback = new Feedback({ username, feedback, rating });
     try {
         if (newFeedback) {
             const savedFeedback = await newFeedback.save();
@@ -23,46 +23,54 @@ export const getFeddbacks = async (req, resp, next) => {
     }
 }
 
-// export const createComment = async (req, resp, next) => {
-//     try {
-//         const postId = req.params.id;
-//         const { content } = req.body;
+export const like = async (req, resp, next) => {
+    const {userId} = req.body
+    try {
+        const result = await Feedback.findByIdAndUpdate(req.body.feedbackId,{
+            $push:{likes: userId}
+        }, {new: true})
 
-//         const post = await Feedback.findByIdAndUpdate(
-//             postId,
-//             {
-//                 $push: { comments: { user: req.user._id, content } },
-//             },
-//             { new: true }
-//         ).populate("author", "name email username headline profilePicture");
+        if (!result) {
+            resp.status(422).send("Issue while liking")
+        }
+        resp.status(200).json(result);
+    } catch (error) {
+        next(error);
+    }
+}
+export const dislike = async (req, resp, next) => {
+    const {userId} = req.body
+    try {
+        const result = await Feedback.findByIdAndUpdate(req.body.feedbackId,{
+            $pull:{likes: userId}
+        }, {new: true})
 
-//         resp.status(200).json(post);
-//     } catch (error) {
-//         console.error("Error in createComment controller:", error);
-//         next(error);
-//     }
+        if (!result) {
+            resp.status(422).send("Issue while disliking")
+        }
+        resp.status(200).json(result);
+    } catch (error) {
+        next(error);
+    }
+}
 
-// }
+export const comment = async (req, resp, next) => {
+    const comment = {
+        userName: req.body.userName,
+        content: req.body.content
+    };
+    try {
+        const result = await Feedback.findByIdAndUpdate(req.body.feedbackId, {
+            $push: {comments: comment}
+        }, {new: true})
+        // .populate("comments.postedBy", "_id username", { strictPopulate: false })
 
-// export const likePost = async (req, resp, next) => {
-//     try {
-//         const postId = req.params.id;
-//         const post = await Feedback.findById(postId);
-//         const userId = req.user._id;
+        if (!result) {
+            resp.status(422).send("Issue while commenting");
+        }
+        resp.status(200).json(result);
+    } catch (error) {
+       next(error) 
+    }
+}
 
-//         if (post.likes.includes(userId)) {
-//             // unlike the post
-//             post.likes = post.likes.filter((id) => id.toString() !== userId.toString());
-//         } else {
-//             // like the post
-//             post.likes.push(userId);
-//         }
-
-//         await post.save();
-
-//         resp.status(200).json(post);
-//     } catch (error) {
-//         console.error("Error in likePost controller:", error);
-//         next(error)
-//     }
-// }

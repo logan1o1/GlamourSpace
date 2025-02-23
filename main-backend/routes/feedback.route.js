@@ -1,12 +1,13 @@
 import express from "express";
-import { getFeddbacks, giveFeedback } from "../controllers/feedbacks.controller.js";
+import { comment, dislike, getFeddbacks, giveFeedback, like } from "../controllers/feedbacks.controller.js";
 import { verifyToken } from "../middlewares/verifyUser.js";
 
 const feedbackRouter = express.Router()
 
-feedbackRouter.post("/giveFeedback", giveFeedback)
-feedbackRouter.get("/getFeddbacks", getFeddbacks)
-// feedbackRouter.post("/:id/comment", createComment);
-// feedbackRouter.post("/:id/like", likePost);
+feedbackRouter.post("/giveFeedback", giveFeedback);
+feedbackRouter.get("/getFeddbacks", getFeddbacks);
+feedbackRouter.put("/like", like);
+feedbackRouter.put("/dislike", dislike);
+feedbackRouter.put("/comment", comment)
 
 export default feedbackRouter;

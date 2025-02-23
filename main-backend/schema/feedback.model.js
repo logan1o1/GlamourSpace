@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+mongoose.set('strictPopulate', false);
+
 const feedbackModel = mongoose.Schema({
     username: {
         type: String,
@@ -14,15 +16,14 @@ const feedbackModel = mongoose.Schema({
         max: 5,
         required: true
     },
-    likes: {
-        type: Number,
-        default: 0
-    },
+    likes: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }],
     comments: [
         {
             content: { type: String },
-            user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-            createdAt: { type: Date, default: Date.now },
+            userName: { type: String, ref: "User" },
         },
     ],
 }, { timestamps: true })

@@ -37,11 +37,11 @@ export default function RequestedModels() {
   }
 
   return (
-    <div className="flex flex-wrap gap-4 p-4 justify-center">
+    <div className="min-h-screen flex flex-wrap gap-4 p-4 justify-center">
       {reqModels.map((item, index) => (
         <div
           key={index}
-          className="bg-white shadow-md rounded-md p-4 w-64"
+          className="bg-white shadow-md rounded-md p-4 w-64 h-32"
         >
           <p>
             <span className="font-semibold">Username:</span> {item.username}

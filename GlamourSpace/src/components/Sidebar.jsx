@@ -1,57 +1,50 @@
-import React, { useState } from "react";
-import { TfiMenu } from "react-icons/tfi";
+import React from "react";
 import { Link } from "react-router-dom";
 
-
-
-const Sidebar = ({ isOpen, toggleSidebar }) => {
-  const [activeItem, setActiveItem] = useState("overview");
-
-  const menuItems = [
-    { id: "overview", label: "Overview" },
-    { id: "features", label: "Features" },
-    { id: "instalation", label: "Installation" },
-    { id: "usages", label: "Usage" },
-    { id: "supportedDevices", label: "Supported Devices" },
-    { id: "faqs", label: "FAQs" },
-    { id: "contact-support", label: "Contact Support" },
-  ];
-
+export default function Sidebar() {
   return (
-    <div
-      className={`fixed top-0 left-0 h-full w-50 bg-slate-300 transform ${
-        isOpen ? "translate-x-0" : "-translate-x-full"
-      } transition-transform duration-300 z-40`}
-    >
-      {/* Sidebar Header */}
-      <div className="p-4 font-bold text-lg flex justify-between items-center">
-        <span>Get Started</span>
-        <button
-          className=" focus:outline-none"
-          onClick={toggleSidebar}
-        >
-          <TfiMenu size={24} />
-        </button>
-      </div>
-
-      {/* Menu Items */}
-      <ul className="mt-4">
-        {menuItems.map((item) => (
-          <li
-            key={item.id}
-            className={`cursor-pointer p-2 pl-4 ${
-              activeItem === item.id
-                ? "bg-gray-700 text-white"
-                : "hover:bg-gray-600"
-            }`}
-            onClick={() => setActiveItem(item.id)}
+    <aside className="w-64 min-h-screen bg-gray-100 text-gray-900 border-r border-gray-500">
+      <div className="p-4">
+        <h2 className="text-l font-bold mb-4">Documentation</h2>
+        <nav className="space-y-2">
+          <Link
+          to={"/overview"}
+            className="block px-3 py-2 hover:underline font-semibold text-slate-900"
           >
-            <Link to={item.id}>{item.label}</Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+            Overview
+          </Link>
+          <Link
+          to={"/installation"}
+            className="block px-3 py-2 hover:underline font-semibold text-slate-900"
+          >
+            Installation
+          </Link>
+          <Link
+          to={"/features"}
+            className="block px-3 py-2 hover:underline font-semibold text-slate-900"
+          >
+            Features
+          </Link>
+          <Link
+          to={"/usage"}
+            className="block px-3 py-2 hover:underline font-semibold text-slate-900"
+          >
+            Usage
+          </Link>
+          <Link
+          to={"/supporteddevices"}
+            className="block px-3 py-2 hover:underline font-semibold text-slate-900"
+          >
+            SupportedDevices
+          </Link>
+          <Link
+          to={"/faqs"}
+            className="block px-3 py-2 hover:underline font-semibold text-slate-900"
+          >
+            FAQs
+          </Link>
+        </nav>
+      </div>
+    </aside>
   );
-};
-
-export default Sidebar;
+}

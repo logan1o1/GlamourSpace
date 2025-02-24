@@ -37,7 +37,6 @@ export default function Navbar() {
           </h1>
         </Link>
 
-        {/* Search Bar */}
         <form
           onSubmit={handleSubmit}
           className="bg-slate-200 p-2 rounded-xl flex items-center w-28 sm:w-64 mr-2"

@@ -10,7 +10,6 @@ import { Link } from 'react-router-dom'
 export default function Home() {
   return (
     <div className="bg-gradient-to-br from-gray-100 via-blue-50 to-blue-100 min-h-screen flex flex-col items-center justify-center px-6">
-      {/* Header Section */}
       <header className="text-center mb-8">
         <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800">
           Welcome to <span className="text-blue-600">GlamourSpaceAR</span>
@@ -21,7 +20,6 @@ export default function Home() {
         </p>
       </header>
 
-      {/* Illustration */}
       <div className="flex items-center justify-center mb-8">
         <img
           src="https://via.placeholder.com/600x400"
@@ -30,16 +28,13 @@ export default function Home() {
         />
       </div>
 
-      {/* Buttons */}
       <div className="flex flex-col md:flex-row gap-4">
-        {/* Download Button */}
         <Link
           to="#download"
           className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition"
         >
           Download 
         </Link>
-        {/* Documentation Button */}
         <Link
           to="/overview"
           className="bg-gray-800 text-white px-6 py-3 rounded-lg shadow-md hover:bg-gray-900 transition"

@@ -134,7 +134,7 @@ export default function Inventory() {
   }, [eventsChanged]);
 
   return (
-    <div>
+    <div className="min-h-screen">
       {user ? (
         user.isAdmin ? (
           <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 flex items-center justify-center px-4 py-10">

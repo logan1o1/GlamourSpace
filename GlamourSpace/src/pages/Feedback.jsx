@@ -51,6 +51,7 @@ export default function Feedback() {
       });
       const data = await response.json();
       setLoading(false);
+      triggerEventsChange();
       if (data.success != false) {
         setOpen(false);
         setValue(null);
@@ -60,7 +61,6 @@ export default function Feedback() {
         navigate("/feedbacks");
         return;
       }
-      triggerEventsChange();
     } catch (error) {
       setLoading(false);
       setError(error.message);
@@ -188,7 +188,7 @@ export default function Feedback() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-full">
+    <div className="min-h-screen w-full flex flex-col justify-center">
       <button
         className="fixed bottom-5 right-5 bg-blue-500 text-white rounded-full w-14 h-14 shadow-lg flex items-center justify-center text-xl hover:bg-blue-600"
         onClick={() => setOpen(true)}
@@ -226,7 +226,7 @@ export default function Feedback() {
       </AddReview>
       <br />
       {feedbacks ? (
-        <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 p-5">
+        <div className="min-h-screen p-5">
           <div className="max-w-4xl mx-auto">
             <div className="flex flex-col gap-4">
               {feedbacks.map((feed, index) => (

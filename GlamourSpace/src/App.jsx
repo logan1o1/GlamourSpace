@@ -7,17 +7,16 @@ import Inventory from "./pages/Inventory";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import AddReview from "./components/AddReview";
-import { useState } from "react";
 import Footer from "./components/Footer";
 import RequestedModels from "./pages/RequestedModels";
 import { EventProvider } from "./context/EventContext";
 import Sidebar from "./components/Sidebar";
-import Overview from "./docs/Overview";
-import Installation from "./docs/Installation";
-import Features from "./docs/Features";
-import Usage from "./docs/Usage";
-import SupportedDevices from "./docs/SupportedDevices";
-import FAQs from "./docs/FAQs";
+// import Overview from "./docs/Overview";
+// import Installation from "./docs/Installation";
+// import Features from "./docs/Features";
+// import Usage from "./docs/Usage";
+// import SupportedDevices from "./docs/SupportedDevices";
+// import FAQs from "./docs/FAQs";
 
 function App() {
   return (
@@ -37,7 +36,7 @@ function App() {
                 <Route path="/requested-models" element={<RequestedModels />} />
                 <Route path="/sign-up" element={<Signup />} />
                 <Route path="/sign-in" element={<Signin />} />
-                <Route path="/overview" element={<Overview />} />
+                {/* <Route path="/overview" element={<Overview />} />
                 <Route path="/installation" element={<Installation />} />
                 <Route path="/features" element={<Features />} />
                 <Route path="/usage" element={<Usage />} />
@@ -45,7 +44,7 @@ function App() {
                   path="/supporteddevices"
                   element={<SupportedDevices />}
                 />
-                <Route path="/faqs" element={<FAQs />} />
+                <Route path="/faqs" element={<FAQs />} /> */}
               </Routes>
               <Footer />
             </div>

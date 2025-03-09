@@ -11,6 +11,7 @@ import Footer from "./components/Footer";
 import RequestedModels from "./pages/RequestedModels";
 import { EventProvider } from "./context/EventContext";
 import Sidebar from "./components/Sidebar";
+import Profile from "./pages/Profile";
 // import Overview from "./docs/Overview";
 // import Installation from "./docs/Installation";
 // import Features from "./docs/Features";
@@ -23,30 +24,36 @@ function App() {
     <>
       <BrowserRouter>
         <EventProvider>
-          <Navbar />
-          <div className="flex">
-            <Sidebar />
-            <div className="flex-1">
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/feedbacks" element={<Feedback />} />
-                <Route path="/store" element={<Inventory />} />
-                <Route path="/add-review" element={<AddReview />} />
-                <Route path="/requested-models" element={<RequestedModels />} />
-                <Route path="/sign-up" element={<Signup />} />
-                <Route path="/sign-in" element={<Signin />} />
-                {/* <Route path="/overview" element={<Overview />} />
+          <div className="flex flex-col min-h-screen">
+            <Navbar />
+            <div className="flex">
+              <Sidebar />
+              <div className="flex-1">
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/feedbacks" element={<Feedback />} />
+                  <Route path="/store" element={<Inventory />} />
+                  <Route path="/add-review" element={<AddReview />} />
+                  <Route
+                    path="/requested-models"
+                    element={<RequestedModels />}
+                  />
+                  <Route path="/sign-up" element={<Signup />} />
+                  <Route path="/sign-in" element={<Signin />} />
+                  <Route path="/profile" element={<Profile />} />
+                  {/* <Route path="/overview" element={<Overview />} />
                 <Route path="/installation" element={<Installation />} />
                 <Route path="/features" element={<Features />} />
                 <Route path="/usage" element={<Usage />} />
                 <Route
-                  path="/supporteddevices"
-                  element={<SupportedDevices />}
+                path="/supporteddevices"
+                element={<SupportedDevices />}
                 />
                 <Route path="/faqs" element={<FAQs />} /> */}
-              </Routes>
-              <Footer />
+                </Routes>
+                <Footer />
+              </div>
             </div>
           </div>
         </EventProvider>

@@ -14,44 +14,10 @@ export default function Inventory() {
   const [error, setError] = useState("");
   const [models, setModels] = useState([]);
   const { authUser } = useAuthContext();
-  const [reqBody, setReqBody] = useState({});
   const user = JSON.parse(authUser);
+  const [reqBody, setReqBody] = useState({});
   const { eventsChanged, triggerEventsChange } = useEventContext();
 
-  const handleChange = (e) => {
-    setReqBody({
-      ...reqBody,
-      [e.target.id]: e.target.value,
-    });
-  };
-
-  const reqModel = async (e) => {
-    e.preventDefault();
-    try {
-      setLoading(true);
-      const response = await fetch("/api/inventory/reqModel", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...reqBody,
-          username: reqBody.username,
-          model: reqBody.model,
-          description: reqBody.description,
-        }),
-      });
-      const data = await response.json();
-      console.log(data);
-      setLoading(false);
-      if (data.success == false) setError(data.message);
-      setReqBody({});
-      triggerEventsChange()
-    } catch (error) {
-      setLoading(false);
-      setError(error.message);
-    }
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -233,25 +199,10 @@ export default function Inventory() {
                   </p>
                 )}
               </div>
-              <h1 className="text-2xl font-bold text-gray-800 mb-6 mt-6 text-center">
+              {/* <h1 className="text-2xl font-bold text-gray-800 mb-6 mt-6 text-center">
                 Request a Model
-              </h1>
-              <form onSubmit={reqModel} className="space-y-4 " action="form">
-                <div>
-                  <label
-                    htmlFor="username"
-                    className="block text-gray-700 font-medium mb-2"
-                  >
-                    Username:
-                  </label>
-                  <input
-                    id="username"
-                    type="text"
-                    placeholder="Enter username"
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-                  />
-                </div>
+              </h1> */}
+              {/* <form onSubmit={reqModel} className="space-y-4 " action="form">
                 <div>
                   <label
                     htmlFor="model"
@@ -288,7 +239,7 @@ export default function Inventory() {
                 >
                   Submit Request
                 </button>
-              </form>
+              </form> */}
             </div>
           </div>
         )

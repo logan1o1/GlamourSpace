@@ -22,10 +22,10 @@ export default function Signin() {
       setLoading(true);
       const results = await fetch("/api/user/login", {
         method: "POST",
-        body: JSON.stringify(formData),
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify(formData),
       });
       const data = await results.json();
       if (data.success == false) {

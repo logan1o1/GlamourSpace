@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
+import { CgProfile } from "react-icons/cg";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 import { TfiMenu } from "react-icons/tfi";
@@ -14,15 +15,6 @@ export default function Navbar() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Your search logic here if needed
-  };
-
-  const signoutHandler = async () => {
-    try {
-      await fetch("/api/user/logout");
-      logout();
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   return (
@@ -81,9 +73,7 @@ export default function Navbar() {
 
         <div className="md:hidden relative group">
           <TfiMenu size={24} className="cursor-pointer" />
-          <ul
-            className="absolute right-0 mt-2 w-40 bg-white shadow-md rounded-md p-2 hidden group-hover:block"
-          >
+          <ul className="absolute right-0 mt-2 w-40 bg-white shadow-md rounded-md p-2 hidden group-hover:block">
             <Link to="/">
               <li className="hover:underline text-slate-800 py-1">Home</li>
             </Link>
@@ -113,9 +103,9 @@ export default function Navbar() {
         </div>
 
         {authUser ? (
-          <BiLogOut
-            onClick={signoutHandler}
-            className="ml-3 cursor-pointer text-slate-800 text-xl"
+          <CgProfile
+            className="ml-3 cursor-pointer text-slate-800 text-2xl"
+            onClick={() => navigate("/profile")}
           />
         ) : (
           <Link to="/sign-in" className="ml-3 hover:underline text-slate-800">

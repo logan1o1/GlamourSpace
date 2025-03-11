@@ -22,6 +22,7 @@ export default function Feedback() {
   const [clicked, setClicked] = useState(false);
   const [openReplyId, setOpenReplyId] = useState(null);
   const { eventsChanged, triggerEventsChange } = useEventContext();
+  const [userAlreadyLiked, setUserAlreadyLiked] = useState(false)
 
   const handleToggleReply = (id) => {
     if (openReplyId === id) {
@@ -109,12 +110,15 @@ export default function Feedback() {
   );
 
   const likeFeedback = async (id) => {
-    const userAlreadyLiked = feedbacks.some((feedback) =>
-      feedback.likes.includes(user._id)
+    feedbacks.map((feedback) => {
+      if (feedback._id == id && feedback.likes.includes[user._id]) setUserAlreadyLiked(true);
+    }
     );
     if (userAlreadyLiked) {
       return;
     }
+    console.log("userAlreadyLiked");
+
     try {
       setLoading(true);
       const response = await fetch("/api/feedback/like", {
@@ -126,7 +130,7 @@ export default function Feedback() {
         }),
       });
       const data = await response.json();
-      console.log(data);
+      console.log(data, "like data");
       setLoading(false);
       if (data.success == false) setError(data.message);
       triggerEventsChange();
@@ -229,9 +233,9 @@ export default function Feedback() {
         <div className="min-h-screen p-5">
           <div className="max-w-4xl mx-auto">
             <div className="flex flex-col gap-4">
-              {feedbacks.map((feed, index) => (
+              {feedbacks.map((feed) => (
                 <div
-                  key={index}
+                  key={feed._id}
                   className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow"
                 >
                   <div className="flex justify-between items-center mb-2">
@@ -242,7 +246,6 @@ export default function Feedback() {
                     <Rating name="read-only" value={feed.rating} readOnly />
                   </div>
 
-                  {/* Feedback text */}
                   <p className="text-gray-600 text-sm">{feed.feedback}</p>
 
                   <div className="flex items-center border-t border-gray-300 pt-3 mt-2">

@@ -9,37 +9,37 @@ export default function Sidebar() {
         <nav className="space-y-2">
           <Link
           to={"/overview"}
-            className="block px-3 py-2 hover:underline font-semibold text-slate-900"
+            className="block px-3 py-2 hover:underline font-semibold text-slate-700"
           >
             Overview
           </Link>
           <Link
           to={"/installation"}
-            className="block px-3 py-2 hover:underline font-semibold text-slate-900"
+            className="block px-3 py-2 hover:underline font-semibold text-slate-700"
           >
             Installation
           </Link>
           <Link
           to={"/features"}
-            className="block px-3 py-2 hover:underline font-semibold text-slate-900"
+            className="block px-3 py-2 hover:underline font-semibold text-slate-700"
           >
             Features
           </Link>
           <Link
           to={"/usage"}
-            className="block px-3 py-2 hover:underline font-semibold text-slate-900"
+            className="block px-3 py-2 hover:underline font-semibold text-slate-700"
           >
             Usage
           </Link>
           <Link
           to={"/supporteddevices"}
-            className="block px-3 py-2 hover:underline font-semibold text-slate-900"
+            className="block px-3 py-2 hover:underline font-semibold text-slate-700"
           >
             SupportedDevices
           </Link>
           <Link
           to={"/faqs"}
-            className="block px-3 py-2 hover:underline font-semibold text-slate-900"
+            className="block px-3 py-2 hover:underline font-semibold text-slate-700"
           >
             FAQs
           </Link>

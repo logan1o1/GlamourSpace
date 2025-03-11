@@ -39,9 +39,9 @@ export default function RequestedModels() {
   return (
     <div className="min-h-screen">
       <div className="flex flex-wrap gap-x-5 gap-y-5 p-5 items-start">
-        {reqModels.map((item, index) => (
+        {reqModels.map((item) => (
           <div
-            key={index}
+            key={item._id}
             className="bg-white shadow-md rounded-md p-2 w-64 h-32"
           >
             <p>

@@ -47,22 +47,22 @@ export default function Navbar() {
 
         <ul className="hidden md:flex gap-4 items-center">
           <Link to="/">
-            <li className="hover:underline text-slate-800">Home</li>
+            <li className="hover:underline text-slate-700">Home</li>
           </Link>
           <Link to="/about">
-            <li className="hover:underline text-slate-800">About</li>
+            <li className="hover:underline text-slate-700">About</li>
           </Link>
           <Link to="/feedbacks">
-            <li className="hover:underline text-slate-800">Feedback</li>
+            <li className="hover:underline text-slate-700">Feedback</li>
           </Link>
           {user && (
             <>
               <Link to="/store">
-                <li className="hover:underline text-slate-800">Inventory</li>
+                <li className="hover:underline text-slate-700">Inventory</li>
               </Link>
               {user.isAdmin && (
                 <Link to="/requested-models">
-                  <li className="hover:underline text-slate-800">
+                  <li className="hover:underline text-slate-700">
                     Requested Models
                   </li>
                 </Link>
@@ -75,24 +75,24 @@ export default function Navbar() {
           <TfiMenu size={24} className="cursor-pointer" />
           <ul className="absolute right-0 mt-2 w-40 bg-white shadow-md rounded-md p-2 hidden group-hover:block">
             <Link to="/">
-              <li className="hover:underline text-slate-800 py-1">Home</li>
+              <li className="hover:underline text-slate-700 py-1">Home</li>
             </Link>
             <Link to="/about">
-              <li className="hover:underline text-slate-800 py-1">About</li>
+              <li className="hover:underline text-slate-700 py-1">About</li>
             </Link>
             <Link to="/feedbacks">
-              <li className="hover:underline text-slate-800 py-1">Feedback</li>
+              <li className="hover:underline text-slate-700 py-1">Feedback</li>
             </Link>
             {user && (
               <>
                 <Link to="/store">
-                  <li className="hover:underline text-slate-800 py-1">
+                  <li className="hover:underline text-slate-700 py-1">
                     Inventory
                   </li>
                 </Link>
                 {user.isAdmin && (
                   <Link to="/requested-models">
-                    <li className="hover:underline text-slate-800 py-1">
+                    <li className="hover:underline text-slate-700 py-1">
                       Requested Models
                     </li>
                   </Link>
@@ -104,11 +104,11 @@ export default function Navbar() {
 
         {authUser ? (
           <CgProfile
-            className="ml-3 cursor-pointer text-slate-800 text-2xl"
+            className="ml-3 cursor-pointer text-slate-700 text-2xl"
             onClick={() => navigate("/profile")}
           />
         ) : (
-          <Link to="/sign-in" className="ml-3 hover:underline text-slate-800">
+          <Link to="/sign-in" className="ml-3 hover:underline text-slate-700">
             Sign-in
           </Link>
         )}

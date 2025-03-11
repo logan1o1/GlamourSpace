@@ -169,7 +169,7 @@ export default function Inventory() {
           <div className="min-h-screen bg-blue-50 flex justify-center">
             <div className="max-w-6xl w-full py-12 px-4">
               <h1 className="text-2xl font-bold text-gray-800 text-center mb-8">
-                Available Models
+                General Models
               </h1>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
                 {models.length > 0 ? (

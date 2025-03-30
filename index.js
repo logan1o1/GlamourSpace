@@ -12,7 +12,6 @@ import path from 'path';
 const __dirname = path.resolve()
 
 dotenv.config();
-const PORT = process.env.PORT || 4000
 
 const app = exp();
 app.use(exp.json());
@@ -23,6 +22,7 @@ const corsOptions = {
 }
 app.use(cors(corsOptions))
 
+const PORT = process.env.PORT || 4000
 
 
 app.use("/api/inventory", inventoryRouter);
@@ -34,9 +34,13 @@ app.get("*", (req, resp) => {
     resp.sendFile(path.join(__dirname, "GlamourSpace", "dist", "index.html"));
 })
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     connectToDb()
     console.log("app running on:", PORT);
+});
+
+server.on("error", (err) => {
+    console.error("Server error:", err);
 });
 
 app.use((err, req, resp, next) => {

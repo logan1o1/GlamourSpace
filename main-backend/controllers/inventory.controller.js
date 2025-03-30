@@ -31,8 +31,25 @@ export const reqModel = async (req, resp, next) => {
 export const getReqModels = async (req, resp, next) => {
     try {
         const reqModels = await Reqmodels.find();
-        resp.status(200).json(reqModels) 
+        resp.status(200).json(reqModels)
     } catch (error) {
         next(error)
+    }
+}
+
+export const completeReqModel = async (req, resp, next) => {
+    try {
+    const validProduct = await Reqmodels.findById(req.params.id);
+    if (!validProduct) return next(handleError(404, "Product not found"));
+        
+    const completedReq = await Reqmodels.findByIdAndUpdate(req.params.id, {
+        $set: {
+            file: req.body.file,
+            completed: true
+        }
+    }, {new: true});
+    resp.status(200).json(completedReq);
+    } catch (error) {
+     next(error)   
     }
 }

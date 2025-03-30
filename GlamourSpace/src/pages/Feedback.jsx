@@ -110,14 +110,13 @@ export default function Feedback() {
   );
 
   const likeFeedback = async (id) => {
-    feedbacks.map((feedback) => {
-      if (feedback._id == id && feedback.likes.includes[user._id]) setUserAlreadyLiked(true);
-    }
-    );
-    if (userAlreadyLiked) {
+    const feedbackItem = feedbacks.find((feedback) => feedback._id == id);
+    if (!feedbackItem) return;
+
+    if (feedbackItem.likes.includes(user._id)) {
       return;
     }
-    console.log("userAlreadyLiked");
+
 
     try {
       setLoading(true);
@@ -130,7 +129,6 @@ export default function Feedback() {
         }),
       });
       const data = await response.json();
-      console.log(data, "like data");
       setLoading(false);
       if (data.success == false) setError(data.message);
       triggerEventsChange();

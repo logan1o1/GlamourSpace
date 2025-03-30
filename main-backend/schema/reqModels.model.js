@@ -12,6 +12,13 @@ const reqModel = mongoose.Schema({
     description: {
         type: String,
         required: true
+    },
+    file: {
+        type: String
+    },
+    completed: {
+        type: Boolean,
+        default: false
     }
 })
 

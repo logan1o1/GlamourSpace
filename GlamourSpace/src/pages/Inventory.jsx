@@ -15,7 +15,6 @@ export default function Inventory() {
   const [models, setModels] = useState([]);
   const { authUser } = useAuthContext();
   const user = JSON.parse(authUser);
-  const [reqBody, setReqBody] = useState({});
   const { eventsChanged, triggerEventsChange } = useEventContext();
 
 
@@ -199,47 +198,6 @@ export default function Inventory() {
                   </p>
                 )}
               </div>
-              {/* <h1 className="text-2xl font-bold text-gray-800 mb-6 mt-6 text-center">
-                Request a Model
-              </h1> */}
-              {/* <form onSubmit={reqModel} className="space-y-4 " action="form">
-                <div>
-                  <label
-                    htmlFor="model"
-                    className="block text-gray-700 font-medium mb-2"
-                  >
-                    Model name:
-                  </label>
-                  <input
-                    id="model"
-                    type="text"
-                    placeholder="Enter model name"
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="description"
-                    className="block text-gray-700 font-medium mb-2"
-                  >
-                    Model description:
-                  </label>
-                  <input
-                    id="description"
-                    type="text"
-                    placeholder="Enter Description"
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md transition-colors"
-                >
-                  Submit Request
-                </button>
-              </form> */}
             </div>
           </div>
         )

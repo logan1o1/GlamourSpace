@@ -28,7 +28,7 @@ function App() {
             <Navbar />
             <div className="flex">
               <Sidebar />
-              <div className="flex-1">
+              <div className="flex-1 ">
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/about" element={<About />} />

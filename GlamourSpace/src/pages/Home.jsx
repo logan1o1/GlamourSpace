@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
 // import Installation from '../Docs/Installation'
 // import Overview from '../Docs/Overview'
 // import Usage from '../Docs/Usage'
@@ -9,13 +9,13 @@ import { Link } from 'react-router-dom'
 
 export default function Home() {
   return (
-    <div className="bg-gradient-to-br from-gray-100 via-blue-50 to-blue-100 min-h-screen flex flex-col items-center justify-center px-6">
+    <div className="bg-gradient-to-br from-gray-100 via-blue-50 to-blue-100 min-h-screen flex flex-col items-center justify-center px-4 py-10 w-screen">
       <header className="text-center mb-8">
         <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800">
           Welcome to <span className="text-blue-600">GlamourSpaceAR</span>
         </h1>
         <p className="text-lg md:text-xl text-gray-600 mt-4">
-          Transform your space into a stunning interior design experience with 
+          Transform your space into a stunning interior design experience with
           Augmented Reality.
         </p>
       </header>
@@ -33,7 +33,7 @@ export default function Home() {
           to="#download"
           className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition"
         >
-          Download 
+          Download
         </Link>
         <Link
           to="/overview"
@@ -56,5 +56,5 @@ export default function Home() {
       <SupportedDevices/>
       <FAQs/> */}
     </div>
-  )
+  );
 }

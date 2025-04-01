@@ -21,15 +21,15 @@ export default function Sidebar() {
           className={`absolute -right-5 top-24 z-50 bg-white rounded-full p-2 border border-gray-200 shadow-md hover:bg-gray-50 transition-all`}
         >
           {isOpen ? (
-            <SlArrowLeft className="text-blue-800 text-sm" />
+            <SlArrowLeft className="text-slate-900 text-sm" />
           ) : (
-            <SlArrowRight className="text-blue-800 text-sm" />
+            <SlArrowRight className="text-slate-900 text-sm" />
           )}
         </button>
 
         <div className={`p-4 ${!isOpen && "hidden"}`}>
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg font-bold">Documentation</h2>
+            <h2 className="text-lg text-slate-800 font-bold">Documentation</h2>
           </div>
           <nav className="space-y-2">
             {["Overview", "Installation", "Features", "Usage", "SupportedDevices", "FAQs"].map((item) => (

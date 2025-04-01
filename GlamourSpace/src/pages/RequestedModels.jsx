@@ -94,7 +94,7 @@ export default function RequestedModels() {
 
   return (
     <div className="min-h-screen">
-      <div className="flex flex-wrap gap-x-5 gap-y-5 p-5 items-start">
+      <div className="flex justify-center flex-wrap gap-x-4 gap-y-4 p-4">
         {reqModels.map(
           (item) =>
             !item.completed && (

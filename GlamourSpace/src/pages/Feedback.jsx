@@ -22,7 +22,6 @@ export default function Feedback() {
   const [clicked, setClicked] = useState(false);
   const [openReplyId, setOpenReplyId] = useState(null);
   const { eventsChanged, triggerEventsChange } = useEventContext();
-  const [userAlreadyLiked, setUserAlreadyLiked] = useState(false)
 
   const handleToggleReply = (id) => {
     if (openReplyId === id) {
@@ -116,7 +115,6 @@ export default function Feedback() {
     if (feedbackItem.likes.includes(user._id)) {
       return;
     }
-
 
     try {
       setLoading(true);
@@ -239,9 +237,17 @@ export default function Feedback() {
                   <div className="flex justify-between items-center mb-2">
                     <div>
                       <h4 className="font-bold text-sm">{feed.username}</h4>
-                      <p className="text-gray-400 text-xs">Feb 22</p>
+                      <p className="text-gray-400 text-xs">{feed.createdAt.split('T')[0]}</p>
                     </div>
-                    <Rating name="read-only" value={feed.rating} readOnly />
+                    <Rating
+                      sx={{
+                        display: open ? "none" : "flex",
+                        alignItems: "center",
+                      }}
+                      name="read-only"
+                      value={feed.rating}
+                      readOnly
+                    />
                   </div>
 
                   <p className="text-gray-600 text-sm">{feed.feedback}</p>

@@ -152,7 +152,7 @@ export default function Profile() {
   };
 
   return (
-    <div className="min-h-screen ">
+    <div className="min-h-screen flex flex-col items-center justify-center">
       <div className="flex flex-col items-center justify-center pt-4">
         <h1 className="text-2xl text-slate-800 font-bold mb-6">User Profile</h1>
 
@@ -274,79 +274,83 @@ export default function Profile() {
           </div>
         </div>
       </div>
-      <div>
-        <div onClick={handleToggle} className="flex items-center mb-6">
-          <button className="text-xl text-slate-700 pl-4 font-bold">
-            Requested Models
-          </button>
-          {showDropdown ? (
-            <SlArrowDown className="ml-2 text-slate-700" />
-          ) : (
-            <SlArrowRight className="ml-2 text-slate-700" />
-          )}
-        </div>
-        <div className="px-3">
-          <hr className="border-t-1 border-slate-800" />
-        </div>
-        {showDropdown && (
-          <div className="flex flex-wrap gap-x-5 gap-y-5 p-5 items-start">
-            {reqModels.map(
-              (item) =>
-                item.username == user.username &&
-                !item.completed && (
-                  <div
-                    key={item._id}
-                    className="bg-white shadow-md rounded-md p-2 w-64 h-32"
-                  >
-                    <p>
-                      <span className="font-semibold">Model:</span> {item.model}
-                    </p>
-                    <p>
-                      <span className="font-semibold">Description:</span>{" "}
-                      {item.description || "N/A"}
-                    </p>
-                  </div>
-                )
+      <div className="w-full max-w-4xl mt-8 border-l-2 border-black pl-5">
+        <div className="mb-8">
+          <div onClick={handleToggle} className="flex items-center mb-6">
+            <button className="text-xl text-slate-700 pl-4 font-bold">
+              Requested Models
+            </button>
+            {showDropdown ? (
+              <SlArrowDown className="ml-2 text-slate-700" />
+            ) : (
+              <SlArrowRight className="ml-2 text-slate-700" />
             )}
           </div>
-        )}
-      </div>
-      <div className="pt-5">
-        <div onClick={handleToggle} className="flex items-center mb-6">
-          <button className="text-xl text-slate-700 pl-4 font-bold">
-            Request Completed
-          </button>
-          {showDropdown ? (
-            <SlArrowDown className="ml-2 text-slate-700" />
-          ) : (
-            <SlArrowRight className="ml-2 text-slate-700" />
+          <div className="px-3">
+            <hr className="border-t-1 border-slate-800" />
+          </div>
+          {showDropdown && (
+            <div className="flex flex-wrap gap-x-5 gap-y-5 p-5 items-start">
+              {reqModels.map(
+                (item) =>
+                  item.username == user.username &&
+                  !item.completed && (
+                    <div
+                      key={item._id}
+                      className="bg-white shadow-md rounded-md p-2 w-64 h-32"
+                    >
+                      <p>
+                        <span className="font-semibold">Model:</span>{" "}
+                        {item.model}
+                      </p>
+                      <p>
+                        <span className="font-semibold">Description:</span>{" "}
+                        {item.description || "N/A"}
+                      </p>
+                    </div>
+                  )
+              )}
+            </div>
           )}
         </div>
-        <div className="px-3">
-          <hr className="border-t-1 border-slate-800" />
-        </div>
-        {showDropdown && (
-          <div className="flex flex-wrap gap-x-5 gap-y-5 p-5 items-start">
-            {reqModels.map(
-              (item) =>
-                item.username == user.username &&
-                item.completed && (
-                  <div
-                    key={item._id}
-                    className="bg-white shadow-md rounded-md p-2 w-64 h-32"
-                  >
-                    <p>
-                      <span className="font-semibold">Model:</span> {item.model}
-                    </p>
-                    <p>
-                      <span className="font-semibold">Description:</span>{" "}
-                      {item.description || "N/A"}
-                    </p>
-                  </div>
-                )
+        <div className="mb-8">
+          <div onClick={handleToggle} className="flex items-center mb-6">
+            <button className="text-xl text-slate-700 pl-4 font-bold">
+              Request Completed
+            </button>
+            {showDropdown ? (
+              <SlArrowDown className="ml-2 text-slate-700" />
+            ) : (
+              <SlArrowRight className="ml-2 text-slate-700" />
             )}
           </div>
-        )}
+          <div className="px-3">
+            <hr className="border-t-1 border-slate-800" />
+          </div>
+          {showDropdown && (
+            <div className="flex flex-wrap gap-x-5 gap-y-5 p-5 items-start">
+              {reqModels.map(
+                (item) =>
+                  item.username == user.username &&
+                  item.completed && (
+                    <div
+                      key={item._id}
+                      className="bg-white shadow-md rounded-md p-2 w-64 h-32"
+                    >
+                      <p>
+                        <span className="font-semibold">Model:</span>{" "}
+                        {item.model}
+                      </p>
+                      <p>
+                        <span className="font-semibold">Description:</span>{" "}
+                        {item.description || "N/A"}
+                      </p>
+                    </div>
+                  )
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

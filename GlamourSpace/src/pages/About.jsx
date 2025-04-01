@@ -17,17 +17,17 @@ export default function About() {
 
       </p>
       <h1 className='text-3xl font-bold mb-4 text-slate-800'>Our vision</h1>
-      <p>We envision a world where interior design is no longer limited by imagination. Glamour Space AR bridges the gap between ideas and reality, making it possible for anyone to design and experience their perfect home before making any physical changes. Our app is designed to inspire creativity, enhance decision-making, and ultimately, make your space truly yours.
+      <p className='mb-4 text-slate-700'>We envision a world where interior design is no longer limited by imagination. Glamour Space AR bridges the gap between ideas and reality, making it possible for anyone to design and experience their perfect home before making any physical changes. Our app is designed to inspire creativity, enhance decision-making, and ultimately, make your space truly yours.
       </p>
       <h1 className='text-3xl font-bold mb-4 text-slate-800'>Why Choose us</h1>
-      <ul>
+      <ul className='mb-4 text-slate-700'>
          <li><span className='font-bold'>Innovation:</span> We leverage the latest AR technology to provide a truly immersive design experience.</li>
          <li><span className='font-bold'>Comprehensive Tools:</span> From furniture placement to wall painting, our app offers everything you need to design your space.</li>
          <li><span className='font-bold'>User-Friendly:</span> Our intuitive interface is designed to make interior design accessible to everyone, regardless of their experience level.</li>
          <li><span className='font-bold'>Extensive Inventory:</span> With a vast selection of 3D models, you can experiment with countless design possibilities.</li>
       </ul>
       
-      <p className='text-xl font-semibold'>Join us on this journey to redefine interior design. Explore, create, and transform your space with Glamour Space AR – where your imagination becomes reality.</p>
+      <p className='text-xl text-slate-900 font-semibold'>Join us on this journey to redefine interior design. Explore, create, and transform your space with Glamour Space AR – where your imagination becomes reality.</p>
     </div>
     </div>
   )

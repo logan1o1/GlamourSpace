@@ -23,9 +23,9 @@ export default function Navbar() {
         <Link to="/" className="font-bold">
           <h1 className="block md:hidden text-lg text-slate-800">GSAR</h1>
           <h1 className="hidden md:block text-2xl text-slate-800">
-            <span className="text-slate-600 font-mono">Glamour</span>
-            <span className="text-slate-800 font-mono">Space</span>
-            <span className="text-slate-600 font-mono">AR</span>
+            <span className="text-slate-700 font-mono">Glamour</span>
+            <span className="text-slate-900 font-mono">Space</span>
+            <span className="text-slate-700 font-mono">AR</span>
           </h1>
         </Link>
 

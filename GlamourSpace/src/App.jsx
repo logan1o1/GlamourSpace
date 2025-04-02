@@ -12,12 +12,12 @@ import RequestedModels from "./pages/RequestedModels";
 import { EventProvider } from "./context/EventContext";
 import Sidebar from "./components/Sidebar";
 import Profile from "./pages/Profile";
-// import Overview from "./docs/Overview";
-// import Installation from "./docs/Installation";
-// import Features from "./docs/Features";
-// import Usage from "./docs/Usage";
-// import SupportedDevices from "./docs/SupportedDevices";
-// import FAQs from "./docs/FAQs";
+import Overview from "./Docs/Overview";
+import Installation from "./Docs/Installation";
+import Features from "./Docs/Features";
+import Usage from "./Docs/Usage";
+import SupportedDevices from "./Docs/SupportedDevices";
+import FAQs from "./Docs/FAQs";
 
 function App() {
   return (
@@ -42,15 +42,15 @@ function App() {
                   <Route path="/sign-up" element={<Signup />} />
                   <Route path="/sign-in" element={<Signin />} />
                   <Route path="/profile" element={<Profile />} />
-                  {/* <Route path="/overview" element={<Overview />} />
-                <Route path="/installation" element={<Installation />} />
-                <Route path="/features" element={<Features />} />
-                <Route path="/usage" element={<Usage />} />
-                <Route
-                path="/supporteddevices"
-                element={<SupportedDevices />}
-                />
-                <Route path="/faqs" element={<FAQs />} /> */}
+                  <Route path="/overview" element={<Overview />} />
+                  <Route path="/installation" element={<Installation />} />
+                  <Route path="/features" element={<Features />} />
+                  <Route path="/usage" element={<Usage />} />
+                  <Route
+                    path="/supporteddevices"
+                    element={<SupportedDevices />}
+                  />
+                  <Route path="/faqs" element={<FAQs />} />
                 </Routes>
                 <Footer />
               </div>

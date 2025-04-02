@@ -20,13 +20,17 @@ export default function Navbar() {
   return (
     <header className="bg-slate-300 shadow-md z-50 w-full">
       <div className="max-w-6xl mx-auto px-3 py-3 flex justify-between items-center">
-        <Link to="/" className="font-bold">
-          <h1 className="block md:hidden text-lg text-slate-800">GSAR</h1>
-          <h1 className="hidden md:block text-2xl text-slate-800">
+        <Link to="/" className="font-bold md:flex items-center space-x-2">
+          <img
+            src="/Logo.jpg"
+            alt="logo"
+            className="w-9 h-9 rounded-xl shadow-lg"
+          />
+          <div className="hidden md:block text-2xl text-slate-800">
             <span className="text-slate-700 font-mono">Glamour</span>
             <span className="text-slate-900 font-mono">Space</span>
             <span className="text-slate-700 font-mono">AR</span>
-          </h1>
+          </div>
         </Link>
 
         <form

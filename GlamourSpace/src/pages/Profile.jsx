@@ -13,11 +13,17 @@ export default function Profile() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [reqModels, setReqModels] = useState([]);
-  const [showDropdown, setShowDropdown] = useState(false);
+  const [showDropdownFirst, setShowDropdownFirst] = useState(false);
+  const [showDropdownSecond, setShowDropdownSecond] = useState(false);
 
-  const handleToggle = () => {
-    setShowDropdown(!showDropdown);
+  const handleToggleFirst = () => {
+    setShowDropdownFirst(!showDropdownFirst);
   };
+
+  const handleToggleSecond = () => {
+    setShowDropdownSecond(!showDropdownSecond);
+  };
+  
 
   const deleteUser = async () => {
     try {
@@ -276,11 +282,11 @@ export default function Profile() {
       </div>
       <div className="w-full max-w-4xl mt-8 border-l-2 border-black pl-5">
         <div className="mb-8">
-          <div onClick={handleToggle} className="flex items-center mb-6">
+          <div onClick={handleToggleFirst} className="flex items-center mb-6">
             <button className="text-xl text-slate-700 pl-4 font-bold">
               Requested Models
             </button>
-            {showDropdown ? (
+            {showDropdownFirst ? (
               <SlArrowDown className="ml-2 text-slate-700" />
             ) : (
               <SlArrowRight className="ml-2 text-slate-700" />
@@ -289,7 +295,7 @@ export default function Profile() {
           <div className="px-3">
             <hr className="border-t-1 border-slate-800" />
           </div>
-          {showDropdown && (
+          {showDropdownFirst && (
             <div className="flex flex-wrap gap-x-5 gap-y-5 p-5 items-start">
               {reqModels.map(
                 (item) =>
@@ -314,11 +320,11 @@ export default function Profile() {
           )}
         </div>
         <div className="mb-8">
-          <div onClick={handleToggle} className="flex items-center mb-6">
+          <div onClick={handleToggleSecond} className="flex items-center mb-6">
             <button className="text-xl text-slate-700 pl-4 font-bold">
               Request Completed
             </button>
-            {showDropdown ? (
+            {showDropdownSecond ? (
               <SlArrowDown className="ml-2 text-slate-700" />
             ) : (
               <SlArrowRight className="ml-2 text-slate-700" />
@@ -327,7 +333,7 @@ export default function Profile() {
           <div className="px-3">
             <hr className="border-t-1 border-slate-800" />
           </div>
-          {showDropdown && (
+          {showDropdownSecond && (
             <div className="flex flex-wrap gap-x-5 gap-y-5 p-5 items-start">
               {reqModels.map(
                 (item) =>

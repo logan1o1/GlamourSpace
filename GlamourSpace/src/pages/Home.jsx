@@ -1,11 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import Installation from '../Docs/Installation'
-// import Overview from '../Docs/Overview'
-// import Usage from '../Docs/Usage'
-// import SupportedDevices from '../Docs/SupportedDevices'
-// import FAQs from '../Docs/FaQs'
-// import Features from '../Docs/Features'
 
 export default function Home() {
   return (
@@ -48,13 +42,15 @@ export default function Home() {
           Give us a feedback
         </Link>
       </div>
-
-      {/* <Overview/>
-      <Installation/>
-      <Usage/>
-      <Features/>
-      <SupportedDevices/>
-      <FAQs/> */}
+      <div className="bg-blue-200 max-w-5xl mx-auto shadow-md mt-4 rounded-lg p-6">
+        <h4>*Note:</h4>
+        <p>
+          Not all mobile phones have AR support, so please check the Supported
+          devices section to see if your device has the required features or
+          not, if it doesn't have the required features, then there is no point
+          in downloading our application
+        </p>
+      </div>
     </div>
   );
 }

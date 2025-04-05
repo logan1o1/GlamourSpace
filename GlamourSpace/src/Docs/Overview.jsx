@@ -1,15 +1,15 @@
 import React from "react";
+import { Link } from 'react-router-dom';
+
 
 export default function Overview() {
   return (
     <div className="min-h-screen from-gray-100 via-blue-50 to-blue-100 flex justify-center py-10 px-4">
       <div className="max-w-4xl w-full rounded-lg p-8">
-        {/* Heading */}
         <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
           Overview
         </h2>
 
-        {/* Content */}
         <div className="text-gray-700 space-y-6">
           <p className="leading-relaxed text-justify text-lg">
             Welcome to the world of immersive interior design with Glamour Space
@@ -54,6 +54,11 @@ export default function Overview() {
             with your personal style and functional needs. Dive in and
             experience the future of interior design, today.
           </p>
+        </div>
+        <div className="text-right mt-8">
+          <Link to={"/installation"} className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition">
+            Next -{">"}
+          </Link>
         </div>
       </div>
     </div>

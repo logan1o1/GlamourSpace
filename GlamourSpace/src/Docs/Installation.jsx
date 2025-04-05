@@ -56,6 +56,11 @@ export default function Installation() {
           </div>
           <p className="text-center">You're all set! Begin exploring the innovative features of Glamour Space AR and start creating your dream spaces.</p>
         </div>
+        <div className="text-right mt-8">
+          <Link to={"/features"} className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition">
+            Next -{">"}
+          </Link>
+        </div>
       </div>
     </div>
   );

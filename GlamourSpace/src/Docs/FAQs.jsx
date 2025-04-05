@@ -68,6 +68,11 @@ export default function FAQs() {
             </p>
           </div>
         </div>
+        <div className="text-right mt-8">
+          <Link to={"/supporteddevices"} className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition">
+            Next -{">"}
+          </Link>
+        </div>
       </div>
     </div>
   );

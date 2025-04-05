@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from 'react-router-dom';
+
 
 export default function Features() {
   return (
@@ -69,6 +71,11 @@ export default function Features() {
               option.
             </p>
           </div>
+        </div>
+        <div className="text-right mt-8">
+          <Link to={"/usage"} className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition">
+            Next -{">"}
+          </Link>
         </div>
       </div>
     </div>

@@ -12,7 +12,7 @@ export default function Sidebar() {
   return (
     <>
       <aside
-        className={`fixed top-0 left-0 h-screen bg-gray-100 text-gray-900 border-r border-black transition-transform duration-300 ${
+        className={`fixed top-0 left-0 h-screen bg-slate-100 text-gray-900 border-r border-black transition-transform duration-300 ${
           isOpen ? "translate-x-0 w-48" : "-translate-x-full"
         } md:translate-x-0 z-40 pt-20`}
       >
@@ -32,7 +32,7 @@ export default function Sidebar() {
             <h2 className="text-lg text-slate-800 font-bold">Documentation</h2>
           </div>
           <nav className="space-y-2">
-            {["Overview", "Installation", "Features", "Usage", "SupportedDevices", "FAQs"].map((item) => (
+            {["Overview", "Installation", "Features", "Usage", "FAQs", "SupportedDevices"].map((item) => (
               <Link
                 key={item}
                 to={`/${item.toLowerCase()}`}

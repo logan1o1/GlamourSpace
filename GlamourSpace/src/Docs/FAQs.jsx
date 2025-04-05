@@ -64,7 +64,7 @@ export default function FAQs() {
             </h3>
             <p className="text-gray-700 leading-relaxed">
               Reach out via the Help & Support section in the app or email us at 
-              <Link className="text-blue-600 pl-1" to={"mailto:support@glamourspaceAR.com"}>support@glamourspaceAR.com</Link>.
+              <Link className="text-blue-600 pl-1" to={"mailto:glamourspacear@gmail.com"}>support@glamourspaceAR.com</Link>.
             </p>
           </div>
         </div>

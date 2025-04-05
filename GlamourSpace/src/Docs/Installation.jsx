@@ -16,7 +16,7 @@ export default function Installation() {
               1. Download the App
             </h3>
             <p className="text-gray-700 leading-relaxed">
-              Visit our website's landing page at <Link className="text-blue-600" to={"www.glamourspacear.com"}>www.glamourspacear.com</Link> to
+              Visit our website's landing page at <Link className="text-blue-600" to={"https://glamour-space.onrender.com"}>www.glamour-space.com</Link> to
               download the latest version of Glamour Space AR. Note: The app is
               not yet available on the Google Play Store but will be launched
               there in the future.

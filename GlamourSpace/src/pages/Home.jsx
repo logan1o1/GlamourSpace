@@ -24,7 +24,7 @@ export default function Home() {
 
       <div className="flex flex-col md:flex-row gap-4">
         <Link
-          to="#download"
+          to="https://drive.google.com/file/d/1C2Ph0Y_SF_Xe_8ym15zS6lc3DSx8vQh_/view?usp=sharing"
           className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition"
         >
           Download
@@ -42,13 +42,13 @@ export default function Home() {
           Give us a feedback
         </Link>
       </div>
-      <div className="bg-blue-200 max-w-5xl mx-auto shadow-md mt-4 rounded-lg p-6">
+      <div className="bg-blue-100 max-w-5xl mx-auto shadow-md mt-4 rounded-lg p-6">
         <h4>*Note:</h4>
         <p>
-          Not all mobile phones have AR support, so please check the Supported
-          devices section to see if your device has the required features or
+          Not all mobile phones have AR support, so please check the <Link className="text-blue-500" to={"/supporteddevices"}>Supported
+          devices</Link> section to see if your device has the required features or
           not, if it doesn't have the required features, then there is no point
-          in downloading our application
+          in downloading the application.
         </p>
       </div>
     </div>

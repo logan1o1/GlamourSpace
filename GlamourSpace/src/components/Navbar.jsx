@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import { BiLogOut } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";

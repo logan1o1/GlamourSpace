@@ -40,7 +40,18 @@ export default function Features() {
           </div>
           <div className="rounded-lg p-6">
             <h3 className="text-xl font-semibold text-slate-700 mb-2">
-              4. Import from Inventory
+              4. Save Screenshots
+            </h3>
+            <p className="text-gray-700 leading-relaxed">
+              Capture high-quality screenshots of your design, featuring the
+              surrounding environment with added virtual objects. <br />
+              Keep records of different layouts for future reference or
+              comparison.
+            </p>
+          </div>
+          <div className="rounded-lg p-6">
+            <h3 className="text-xl font-semibold text-slate-700 mb-2">
+              5. Import from Inventory
             </h3>
             <p className="text-gray-700 leading-relaxed">
               Use your own 3D models or assets by importing them into the app's
@@ -49,7 +60,7 @@ export default function Features() {
           </div>
           <div className="rounded-lg p-6">
             <h3 className="text-xl font-semibold text-slate-700 mb-2">
-              5. Budget Comparison
+              6. Budget Comparison
             </h3>
             <p className="text-gray-700 leading-relaxed">
               Compare prices of various furniture pieces, flooring materials,

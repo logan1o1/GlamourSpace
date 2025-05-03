@@ -23,7 +23,6 @@ export default function Profile() {
   const handleToggleSecond = () => {
     setShowDropdownSecond(!showDropdownSecond);
   };
-  
 
   const deleteUser = async () => {
     try {
